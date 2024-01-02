@@ -4,7 +4,152 @@
   "modelid": "VALLHORN Wireless Motion Sensor",
   "product": "VALLHORN Wireless Motion Sensor",
   "sleeper": false,
-  "status": "Draft",
+  "status": "Gold",
   "path": "/devices/vallhorn_wireless_motion_sensor.json",
-  "subdevices": []
+  "subdevices": [
+    {
+      "type": "$TYPE_PRESENCE_SENSOR",
+      "restapi": "/sensors",
+      "uuid": [
+        "$address.ext",
+        "0x02",
+        "0x0406"
+      ],
+      "fingerprint": {
+        "profile": "0x0104",
+        "device": "0x",
+        "endpoint": "0x02",
+        "in": [
+          "0x0000",
+          "0x0003",
+          "0x0406"
+        ],
+        "out": [
+        ]
+      },
+      "items": [
+        {
+          "name": "attr/id"
+        },
+        {
+          "name": "attr/lastannounced"
+        },
+        {
+          "name": "attr/lastseen"
+        },
+        {
+          "name": "attr/manufacturername"
+        },
+        {
+          "name": "attr/modelid"
+        },
+        {
+          "name": "attr/name"
+        },
+        {
+          "name": "attr/productid",
+          "parse": {
+            "fn": "zcl:attr",
+            "ep": 1,
+            "cl": "0x0000",
+            "at": "0x000A",
+            "eval": "Item.val = Attr.val"
+          },
+          "read": {
+            "fn": "zcl:attr",
+            "ep": 1,
+            "cl": "0x0000",
+            "at": "0x000A"
+          },
+          "refresh.interval": 86400
+        },
+        {
+          "name": "attr/swversion"
+        },
+        {
+          "name": "attr/type"
+        },
+        {
+          "name": "attr/uniqueid"
+        },
+        {
+          "name": "config/alert"
+        },
+        {
+          "name": "config/battery",
+          "awake": true,
+          "parse": {
+            "fn": "zcl:attr",
+            "ep": 1,
+            "cl": "0x0001",
+            "at": "0x0021",
+            "eval": "Item.val = Math.round(Attr.val / 2)"
+          },
+          "default": 0,
+          "read": {
+            "fn": "zcl:attr",
+            "ep": 1,
+            "cl": "0x0001",
+            "at": "0x0021"
+          },
+          "refresh.interval": 86400
+        },
+        {
+          "name": "config/duration",
+          "default": 60
+        },
+        {
+          "name": "config/group",
+          "default": "auto"
+        },
+        {
+          "name": "config/on"
+        },
+        {
+          "name": "config/reachable"
+        },
+        {
+          "name": "state/dark"
+        },
+        {
+          "name": "state/presence"
+        },
+        {
+          "name": "state/lastupdated"
+        }
+      ]
+    }
+  ],
+  "bindings": [
+    {
+      "bind": "unicast",
+      "src.ep": 2,
+      "cl": "0x0402",
+      "report": [
+        {
+          "at": "0x0000",
+          "dt": "0x29",
+          "min": 10,
+          "max": 300,
+          "change": "0x14"
+        }
+      ]
+    },
+    {
+      "bind": "unicast",
+      "src.ep": 1,
+      "cl": "0x0001",
+      "report": [
+        {
+          "at": "0x0021",
+          "dt": "0x20",
+          "min": 300,
+          "max": 2700,
+          "change": "0x01"
+        }
+      ]
+    }
+  ]
 }
+
+
