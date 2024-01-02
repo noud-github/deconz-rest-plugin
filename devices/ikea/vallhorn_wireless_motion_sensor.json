@@ -254,20 +254,6 @@
     },
     {
       "bind": "unicast",
-      "src.ep": 3,
-      "cl": "0x0402",
-      "report": [
-        {
-          "at": "0x0000",
-          "dt": "0x29",
-          "min": 10,
-          "max": 300,
-          "change": "0x14"
-        }
-      ]
-    },
-    {
-      "bind": "unicast",
       "src.ep": 1,
       "cl": "0x0001",
       "report": [
@@ -277,6 +263,27 @@
           "min": 300,
           "max": 2700,
           "change": "0x01"
+        }
+      ]
+    },
+    {
+      "bind": "unicast",
+      "src.ep": 2,
+      "cl": "0x0000",
+      "report": [
+        {
+          "mf": "0x100b",
+          "at": "0x0032",
+          "dt": "0x10",
+          "min": 5,
+          "max": 7200
+        },
+        {
+          "mf": "0x100b",
+          "at": "0x0033",
+          "dt": "0x10",
+          "min": 5,
+          "max": 7200
         }
       ]
     }
