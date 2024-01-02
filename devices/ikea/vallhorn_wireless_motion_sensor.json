@@ -1,0 +1,10 @@
+{
+  "schema": "devcap1.schema.json",
+  "manufacturername": "$MF_IKEA",
+  "modelid": "VALLHORN Wireless Motion Sensor",
+  "product": "VALLHORN Wireless Motion Sensor",
+  "sleeper": false,
+  "status": "Draft",
+  "path": "/devices/vallhorn_wireless_motion_sensor.json",
+  "subdevices": []
+}
