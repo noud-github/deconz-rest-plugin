@@ -126,12 +126,135 @@
           "default": false
         }
       ]
+    },
+    {
+      "type": "$TYPE_LIGHT_LEVEL_SENSOR",
+      "restapi": "/sensors",
+      "uuid": [
+        "$address.ext",
+        "0x02",
+        "0x0400"
+      ],
+      "fingerprint": {
+        "endpoint": "0x02",
+        "profile": "0x0104",
+        "device": "0x0107",
+        "in": [
+          "0x0400"
+        ]
+      },
+      "items": [
+        {
+          "name": "attr/lastseen"
+        },
+        {
+          "name": "attr/manufacturername"
+        },
+        {
+          "name": "attr/modelid"
+        },
+        {
+          "name": "attr/name"
+        },
+        {
+          "name": "attr/productname",
+          "static": "Hue light sensor"
+        },
+        {
+          "name": "attr/swversion",
+          "read": {
+            "fn": "none"
+          }
+        },
+        {
+          "name": "attr/type"
+        },
+        {
+          "name": "attr/uniqueid"
+        },
+        {
+          "name": "config/alert",
+          "default": "none"
+        },
+        {
+          "name": "config/battery",
+          "parse": {
+            "fn": "zcl:attr",
+            "ep": 1,
+            "cl": "0x0001",
+            "at": "0x0021",
+            "eval": "Item.val = Attr.val / 2"
+          },
+          "read": {
+            "fn": "zcl:attr",
+            "ep": 1,
+            "cl": "0x0001",
+            "at": "0x0021"
+          },
+          "refresh.interval": 7300
+        },
+        {
+          "name": "config/on"
+        },
+        {
+          "name": "config/reachable"
+        },
+        {
+          "name": "config/tholddark"
+        },
+        {
+          "name": "config/tholdoffset"
+        },
+        {
+          "name": "state/dark"
+        },
+        {
+          "name": "state/daylight"
+        },
+        {
+          "name": "state/lastupdated"
+        },
+        {
+          "name": "state/lightlevel",
+          "parse": {
+            "fn": "zcl:attr",
+            "ep": 3,
+            "cl": "0x0400",
+            "at": "0x0000",
+            "script": "0400_lightlevel.js"
+          }
+        },
+        {
+          "name": "state/lux"
+        }
+      ]
     }
   ],
   "bindings": [
     {
       "bind": "unicast",
       "src.ep": 2,
+      "cl": "0x0406",
+      "report": [
+        {
+          "at": "0x0000",
+          "dt": "0x18",
+          "min": 1,
+          "max": 300
+        },
+        {
+          "mf": "0x100b",
+          "at": "0x0030",
+          "dt": "0x20",
+          "min": 5,
+          "max": 7200,
+          "change": "0x01"
+        }
+      ]
+    },
+    {
+      "bind": "unicast",
+      "src.ep": 3,
       "cl": "0x0402",
       "report": [
         {
